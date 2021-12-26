@@ -24,13 +24,24 @@ function randomNumberGeneratorFunction (min, max) {                   // Funzion
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-for (let i=0; i<5; i++) {                 // Genera 5 numeri casuali compresi tra 1 e 100 e stampali sulla pagina
-  randomNumber = randomNumberGeneratorFunction (1, 100);
-  console.log(randomNumber);
-  randomNumberArray.push(randomNumber);
-}
+while (randomNumberArray.length<5) {                                // Genera numeri cassuali 
+    let duplicateNumberCheck = false;
+    randomNumber = Math.floor(Math.random() * (max - min)) + min;
+    console.log(randomNumber);
+  
+    for (let i=0; i<randomNumberArray.length; i++) {
+      if (randomNumber == randomNumberArray[i]) {
+        duplicateNumberCheck = true;
+        console.log("Duplicate Number Check: " + "Questo numero " + "(" + randomNumber + ")" + " è già presente. Ne genero un altro e lo inserisco nell'array");
+      }
+    } 
+  
+    if (duplicateNumberCheck == false) {
+        randomNumberArray.push(randomNumber);
+    }
+  } 
 console.log(randomNumberArray);
-numbers.innerHTML += ("Guarda bene questi numeri e stampali in testa: " + randomNumberArray);
+numbers.innerHTML += ("Guarda bene questi numeri e memorizzali: " + randomNumberArray);
 
 setTimeout(function() {           //Fai sparire i numeri da ricordare poco prima del lancio del prompt
   container.style.display="none";
