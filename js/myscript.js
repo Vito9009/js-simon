@@ -14,6 +14,9 @@ let randomNumber;
 let promptNumberArray = [];
 let promptNumber;
 
+let min = 1;
+let max = 100;
+
 let numbers = document.getElementById("numbers");
 let container = document.getElementById("container");
 
@@ -38,12 +41,19 @@ setTimeout(function() {                                               // Dopo 30
   for (let i=0; i<5; i++) {
     promptNumber = parseInt(prompt("Inserisci uno alla volta i numeri che hai visto"));
 
-    for (let i=0; i<randomNumberArray.length; i++) {
-      if (promptNumber == randomNumberArray[i]) {
-        promptNumberArray.push(promptNumber);
-      }
+    for (let i=0; i<randomNumberArray.length; i++) {                  // Alert se viene inserito un numero non valido
+        if(promptNumber > max || promptNumber < min){
+            alert("Il numero inserito non è valido.");
+            promptNumber = parseInt(prompt("Inserisci uno alla volta i numeri che hai visto"));
+        }
     }
-  }
+    for (let i=0; i<randomNumberArray.length; i++) {
+        if(promptNumber == randomNumberArray[i]){
+            promptNumberArray.push(promptNumber);
+        }
+    }
+} 
+
   container.style.display="block";
 
   numbers.innerHTML = ("Hai indovinato " + promptNumberArray.length + " numeri (" + promptNumberArray + ")");
