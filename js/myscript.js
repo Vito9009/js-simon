@@ -7,3 +7,45 @@ Consigli del giorno:
 * Dividete in piccoli problemi la consegna.
 * Individuate gli elementi di cui avete bisogno per realizzare il programma.
 */
+
+let randomNumberArray = [];
+let randomNumber;
+
+let promptNumberArray = [];
+let promptNumber;
+
+let numbers = document.getElementById("numbers");
+let container = document.getElementById("container");
+
+function randomNumberGeneratorFunction (min, max) {                   // Funzione per generare numeri casuali
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+for (let i=0; i<5; i++) {                 // Genera 5 numeri casuali compresi tra 1 e 100 e stampali sulla pagina
+  randomNumber = randomNumberGeneratorFunction (1, 100);
+  console.log(randomNumber);
+  randomNumberArray.push(randomNumber);
+}
+console.log(randomNumberArray);
+numbers.innerHTML += ("Guarda bene questi numeri e stampali in testa: " + randomNumberArray);
+
+setTimeout(function() {           //Fai sparire i numeri da ricordare poco prima del lancio del prompt
+  container.style.display="none";
+}, 29900);
+
+
+setTimeout(function() {                                               // Dopo 30 secondi apri i prompt per l'inserimento dei numeri
+  for (let i=0; i<5; i++) {
+    promptNumber = parseInt(prompt("Inserisci uno alla volta i numeri che hai visto"));
+
+    for (let i=0; i<randomNumberArray.length; i++) {
+      if (promptNumber == randomNumberArray[i]) {
+        promptNumberArray.push(promptNumber);
+      }
+    }
+  }
+  container.style.display="block";
+
+  numbers.innerHTML = ("Hai indovinato " + promptNumberArray.length + " numeri (" + promptNumberArray + ")");
+  console.log(promptNumberArray);
+}, 30000);
